@@ -19,6 +19,6 @@ Route::middleware(['cors'])->group(function () {
       return $validator->messages();
     }
 
-    return Score::create($request->only(['name', 'score']));
+    return Score::create($request->only(['name', 'score', 'wrong_answer']));
   });
 });
