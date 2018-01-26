@@ -19,6 +19,14 @@ Route::middleware(['cors'])->group(function () {
       return $validator->messages();
     }
 
-    return Score::create($request->only(['name', 'score', 'wrong_answer']));
+    $name = $request->input('name');
+    $score = $request->input('score');
+    $wrong_answer = $request->input('wrong_answer') ?: '';
+
+    return Score::create([
+      'name'         => $name,
+      'score'        => $score,
+      'wrong_answer' => $wrong_answer
+    ]);
   });
 });
