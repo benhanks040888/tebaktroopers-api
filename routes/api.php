@@ -6,7 +6,9 @@ use App\Score;
 
 Route::middleware(['cors'])->group(function () {
   Route::get('scores', function (Request $request) {
-    return Score::orderBy('score', 'desc')->take(20)->get();
+    return Score::selectRaw('*, MAX(score) as score')
+                ->groupBy('name')
+                ->orderBy('score', 'desc')->take(20)->get();
   });
 
   Route::post('scores', function (Request $request) {
